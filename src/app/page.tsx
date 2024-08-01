@@ -1,25 +1,17 @@
 import { Map } from "@/components/Map";
 import { Location } from "@/types";
 
-// TODO: fetch locations
-const locations: Location[] = [
-  {
-    name: "Bratislava",
-    latLng: [48.148598, 17.107748],
-  },
-  {
-    name: "Vienna",
-    latLng: [48.210033, 16.363449],
-  },
-  {
-    name: "Erlaufsee",
-    latLng: [47.791809, 15.273135],
-  },
-];
+const getLocations = async () => {
+  const baseUrl = process.env.BASE_URL;
+  const res = await fetch(`${baseUrl}/api/locations`);
+  const locations: Location[] = await res.json();
+  return locations;
+};
 
-export default function Home() {
+export default async function Home() {
+  const locations = await getLocations();
   return (
-    <main className="">
+    <main>
       <Map locations={locations} />
     </main>
   );
