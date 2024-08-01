@@ -15,10 +15,6 @@ const locations: Location[] = [
     name: "Erlaufsee",
     latLng: [47.791809, 15.273135],
   },
-  {
-    name: "Reichenau an der Rax",
-    latLng: [47.70083647433513, 15.736064860442031],
-  },
 ];
 
 export default function Home() {
