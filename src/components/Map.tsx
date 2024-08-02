@@ -22,7 +22,7 @@ export function Map({ locations }: { locations: Location[] }) {
         : [48.148598, 17.107748];
 
       map.current = L.map(mapContainer.current!).setView(center, 8);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer(process.env.NEXT_PUBLIC_TILES_URL!, {
         maxZoom: 19,
       }).addTo(map.current);
 
