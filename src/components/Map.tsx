@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import type { Map as LMap } from "leaflet";
+import type { LatLngExpression, Map as LMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Location } from "@/types";
 
@@ -17,10 +17,11 @@ export function Map({ locations }: { locations: Location[] }) {
 
       if (map.current) return;
 
-      map.current = L.map(mapContainer.current!).setView(
-        geoUtils.calculateCenter(locations),
-        8
-      );
+      const center: LatLngExpression = locations.length
+        ? geoUtils.calculateCenter(locations)
+        : [48.148598, 17.107748];
+
+      map.current = L.map(mapContainer.current!).setView(center, 8);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
       }).addTo(map.current);
