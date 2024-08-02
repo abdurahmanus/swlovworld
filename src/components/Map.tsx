@@ -22,9 +22,12 @@ export function Map({ locations }: { locations: Location[] }) {
         : [48.148598, 17.107748];
 
       map.current = L.map(mapContainer.current!).setView(center, 8);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-      }).addTo(map.current);
+      L.tileLayer(
+        "https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png",
+        {
+          maxZoom: 19,
+        }
+      ).addTo(map.current);
 
       locations.forEach((location) => {
         L.marker(location.latLng).addTo(map.current!).bindPopup(location.name);
