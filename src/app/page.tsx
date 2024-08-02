@@ -3,7 +3,9 @@ import { Location } from "@/types";
 
 const getLocations = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const res = await fetch(`${baseUrl}/api/locations`);
+  const url = `${baseUrl}/api/locations`;
+  console.log(">>>>>>>> DEBUG", url);
+  const res = await fetch(url);
   const locations: Location[] = await res.json();
   return locations;
 };
