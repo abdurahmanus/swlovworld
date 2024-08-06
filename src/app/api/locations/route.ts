@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Location } from "@/types";
+import { type NextRequest, NextResponse } from "next/server";
+import type { MapLocation } from "@/types";
 import { locations } from "@/content/locations";
 
 export async function GET(
   _req: NextRequest
-): Promise<NextResponse<Location[]>> {
+): Promise<NextResponse<MapLocation[]>> {
   return NextResponse.json(locations);
 }
