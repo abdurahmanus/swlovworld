@@ -18,11 +18,15 @@ export function Map({ locations }: { locations: MapLocation[] }) {
 
       if (map.current) return;
 
-      const center: LatLngExpression = locations.length
-        ? geoUtils.calculateCenter(locations)
+      const bounds = geoUtils.calculateBounds(locations);
+      const center: LatLngExpression = bounds.isValid()
+        ? bounds.getCenter()
         : [48.148598, 17.107748];
 
-      map.current = L.map(mapContainer.current!).setView(center, 8);
+      map.current = L.map(mapContainer.current!)
+        .setView(center)
+        .fitBounds(bounds);
+
       L.tileLayer(process.env.NEXT_PUBLIC_TILES_URL!, {
         maxZoom: 19,
         attribution: "©OpenStreetMap, ©CartoDB",
